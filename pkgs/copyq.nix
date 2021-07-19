@@ -38,7 +38,6 @@ mkDerivation rec {
     libXfixes
     libXtst
     qtx11extras
-  ] ++ lib.optionals stdenv.isLinux [
     knotifications
     qtwayland
     wayland
