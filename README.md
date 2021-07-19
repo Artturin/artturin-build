@@ -1,3 +1,3 @@
 # Build tests
 
-![Build](https://github.com/artturin/artturin-build/workflows/Build%20and%20populate%20cache/badge.svg)
+[![Build](https://github.com/Artturin/artturin-build/actions/workflows/build.yml/badge.svg)](https://github.com/Artturin/artturin-build/actions/workflows/build.yml)

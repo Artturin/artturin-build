@@ -37,9 +37,10 @@ mkDerivation rec {
     libXfixes
     libXtst
     qtx11extras
-    knotifications
     qtwayland
     wayland
+  ] ++ lib.optionals stdenv.isLinux [
+    knotifications
   ];
 
   meta = with lib; {
