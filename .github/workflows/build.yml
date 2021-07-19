@@ -9,6 +9,7 @@ on: [ push, pull_request ]
 #    - cron:  '55 2 * * *'
 jobs:
   tests:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest , macos-latest]
