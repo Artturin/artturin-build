@@ -1,4 +1,5 @@
-{ lib
+{ stdenv
+, lib
 , mkDerivation
 , fetchFromGitHub
 , cmake
@@ -37,10 +38,10 @@ mkDerivation rec {
     libXfixes
     libXtst
     qtx11extras
-    qtwayland
-    wayland
   ] ++ lib.optionals stdenv.isLinux [
     knotifications
+    qtwayland
+    wayland
   ];
 
   meta = with lib; {
