@@ -5,6 +5,6 @@
 {
   lib = import ./lib { inherit pkgs; }; # functions
 
-  copyq = pkgs.libsForQt5.callPackage ../applications/misc/copyq { };
+  copyq = pkgs.libsForQt5.callPackage ./pkgs/copyq { };
 
 }
