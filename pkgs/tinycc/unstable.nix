@@ -1,4 +1,4 @@
-{ lib, stdenv, callPackage, which, xcbuild }:
+{ lib, stdenv, callPackage, which, xcbuild, cctools, DarwinTools }:
 
 callPackage ./base.nix rec {
   version = "unstable-2021-07-27";
@@ -7,4 +7,6 @@ callPackage ./base.nix rec {
 
   extraNative = [ which ] 
     ++ lib.optionals stdenv.isDarwin [ xcbuild ];
+  extraBuild = [ ] 
+    ++ lib.optionals stdenv.isDarwin [ cctools DarwinTools ];
 }

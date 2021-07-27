@@ -6,7 +6,8 @@
   lib = import ./lib { inherit pkgs; }; # functions
   tinycc = pkgs.callPackage ./pkgs/tinycc { };
   tinycc-unstable = pkgs.callPackage ./pkgs/tinycc/unstable.nix { 
-      inherit (darwin.apple_sdk.frameworks) CoreServices;
+      inherit (darwin) DarwinTools cctools;
+      inherit (darwin.apple_sdk.frameworks) CoreServices CoreFoundation;
   };
 
 

@@ -8,6 +8,7 @@
 , rev
 , gcc
 , extraNative ? []
+, extraBuild ? []
 , upstreamVersion ? ""
 }:
 
@@ -21,6 +22,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ perl texinfo ] ++ extraNative;
+  buildInputs = [ ] ++ exraBuild;
 
   hardeningDisable = [ "fortify" ];
 
@@ -30,8 +32,8 @@ stdenv.mkDerivation rec {
     substituteInPlace "texi2pod.pl" \
       --replace "/usr/bin/perl" "${perl}/bin/perl"
 
-    substituteInPlace "configure" \
-      --replace "\`which cc\`" "${gcc}/bin/gcc"
+    #substituteInPlace "configure" \
+    #  --replace "\`which cc\`" "${gcc}/bin/gcc"
 
   '' + lib.optionalString stdenv.isDarwin ''
       substituteInPlace tests/tests2/Makefile \
@@ -42,7 +44,7 @@ stdenv.mkDerivation rec {
     echo ${version} > VERSION
 
     configureFlagsArray+=(
-      "--cc=${gcc}/bin/gcc"
+      "--cc=cc"
       "--elfinterp=$(< $NIX_CC/nix-support/dynamic-linker)"
       "--crtprefix=${lib.getLib stdenv.cc.libc}/lib"
       "--sysincludepaths=${lib.getDev stdenv.cc.libc}/include:{B}/include"
