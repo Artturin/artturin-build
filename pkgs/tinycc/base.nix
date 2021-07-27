@@ -28,13 +28,17 @@ stdenv.mkDerivation rec {
   postPatch = ''
     substituteInPlace "texi2pod.pl" \
       --replace "/usr/bin/perl" "${perl}/bin/perl"
+
+    substituteInPlace "configure" \
+      --replace "which cc" "which gcc"
+
   '';
 
   preConfigure = ''
     echo ${version} > VERSION
 
     configureFlagsArray+=(
-      "--cc=cc"
+      "--cc=gcc"
       "--elfinterp=$(< $NIX_CC/nix-support/dynamic-linker)"
       "--crtprefix=${lib.getLib stdenv.cc.libc}/lib"
       "--sysincludepaths=${lib.getDev stdenv.cc.libc}/include:{B}/include"
