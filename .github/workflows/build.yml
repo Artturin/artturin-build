@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest , macos-latest]
         nixPath:
           - nixpkgs=channel:nixos-unstable
-          - nixpkgs=channel:nixpkgs-unstable
+            #- nixpkgs=channel:nixpkgs-unstable
         NIXPKGS_ALLOW_BROKEN:
           - 1
     #runs-on: ubuntu-latest

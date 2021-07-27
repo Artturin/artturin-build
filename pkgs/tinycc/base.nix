@@ -6,6 +6,7 @@
 , version
 , sha256
 , rev
+, gcc
 , extraNative ? []
 , upstreamVersion ? ""
 }:
@@ -30,15 +31,18 @@ stdenv.mkDerivation rec {
       --replace "/usr/bin/perl" "${perl}/bin/perl"
 
     substituteInPlace "configure" \
-      --replace "which cc" "which gcc"
+      --replace "\`which cc\`" "${gcc}/bin/gcc"
 
+  '' + lib.optionalString stdenv.isDarwin ''
+      substituteInPlace tests/tests2/Makefile \
+        --replace 'SKIP = ' 'SKIP = 106_pthread.test '
   '';
 
   preConfigure = ''
     echo ${version} > VERSION
 
     configureFlagsArray+=(
-      "--cc=gcc"
+      "--cc=${gcc}/bin/gcc"
       "--elfinterp=$(< $NIX_CC/nix-support/dynamic-linker)"
       "--crtprefix=${lib.getLib stdenv.cc.libc}/lib"
       "--sysincludepaths=${lib.getDev stdenv.cc.libc}/include:{B}/include"
