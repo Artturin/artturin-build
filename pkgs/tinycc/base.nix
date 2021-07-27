@@ -7,6 +7,7 @@
 , sha256
 , rev
 , gcc
+, clang
 , extraNative ? []
 , extraBuild ? []
 , upstreamVersion ? ""
@@ -32,8 +33,8 @@ stdenv.mkDerivation rec {
     substituteInPlace "texi2pod.pl" \
       --replace "/usr/bin/perl" "${perl}/bin/perl"
 
-    #substituteInPlace "configure" \
-    #  --replace "\`which cc\`" "${gcc}/bin/gcc"
+    substituteInPlace "configure" \
+      --replace "\`which cc\`" "${clang}/bin/clang"
 
   '' + lib.optionalString stdenv.isDarwin ''
       substituteInPlace tests/tests2/Makefile \
