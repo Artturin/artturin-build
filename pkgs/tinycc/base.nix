@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ perl texinfo ] ++ extraNative;
-  buildInputs = [ ] ++ exraBuild;
+  buildInputs = [ ] ++ extraBuild;
 
   hardeningDisable = [ "fortify" ];
 
