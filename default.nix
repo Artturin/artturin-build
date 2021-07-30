@@ -21,7 +21,7 @@
     crystal;
 
   inherit (pkgs.callPackage ./pkgs/shards { })
-    shards_0_11
+    #shards_0_11
     shards_0_15
     shards;
 
